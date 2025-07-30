@@ -17,9 +17,9 @@
 - **Backend:** Spring Boot, Java  
 - **Frontend:** HTML, CSS, JavaScript *(Optional: Add React if used)*  
 - **Security:** JWT-based Authentication, Role-Based Access Control  
-- **Database:** *(Initial Phase - In-Memory)*, Upcoming – PostgreSQL  
+- **Database:** MySQL, Upcoming – PostgreSQL  
 - **APIs:** Google Maps API for GPS-enabled assistance  
-- **Tools:** IntelliJ IDEA, Postman, Git, GitHub
+- **Tools:** IntelliJ IDEA, VS Code, Postman, Git, GitHub
 
 ---
 
@@ -52,5 +52,53 @@
 
 ## 📦 Project Structure
 
+drive-assist/
+├── src/
+│ ├── main/
+│ │ ├── java/com/driveassist/
+│ │ │ ├── controller/
+│ │ │ ├── service/
+│ │ │ ├── model/
+│ │ │ └── repository/
+│ │ └── resources/
+│ │ ├── static/
+│ │ ├── templates/
+│ │ └── application.properties
 
 
+---
+
+## 📍 How It Works
+
+1. User selects a service type (Fuel, Garage, Car Rental)
+2. App fetches **current location** using Google Maps API
+3. Backend returns nearby services sorted by distance
+4. Results are displayed with **location info and directions**
+
+---
+
+## 🛠️ Setup & Installation
+
+### ✅ Prerequisites
+
+- Java 11+  
+- Maven  
+- Google Maps API Key  
+- Git
+
+### 📥 Steps
+
+```bash
+git clone https://github.com/your-username/drive-assist.git
+cd drive-assist
+
+
+1. Add your API key in application.properties:
+    google.maps.api.key=YOUR_API_KEY
+
+2. Run the application:
+    ./mvnw spring-boot:run
+
+Open in browser at:
+http://localhost:8080/
+    
