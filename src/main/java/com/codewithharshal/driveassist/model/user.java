@@ -1,5 +1,6 @@
 package com.codewithharshal.driveassist.model;
 
-// Inherits Service
-public class garage {
+// Encapsulated user info
+public class user {
+
 }
