@@ -1,6 +1,6 @@
 package com.codewithharshal.driveassist.service;
 
-import com.codewithharshal.driveassist.model.BaseService;
+import com.codewithharshal.driveassist.model.ServiceEntity;
 import com.codewithharshal.driveassist.model.CarRental;
 import com.codewithharshal.driveassist.model.FuelStation;
 import com.codewithharshal.driveassist.model.Garage;
@@ -62,8 +62,8 @@ public class ServiceService {
     }
 
     // Get all nearby services within radiusKm
-    public List<BaseService> getNearbyServices(double userLat, double userLon, double radiusKm) {
-        List<BaseService> nearby = new ArrayList<>();
+    public List<ServiceEntity> getNearbyServices(double userLat, double userLon, double radiusKm) {
+        List<ServiceEntity> nearby = new ArrayList<>();
 
         // Fuel stations
         for (FuelStation fs : fuelRepo.findAll()) {

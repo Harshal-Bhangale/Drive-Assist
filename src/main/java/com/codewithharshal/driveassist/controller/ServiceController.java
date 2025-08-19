@@ -1,6 +1,6 @@
 package com.codewithharshal.driveassist.controller;
 
-import com.codewithharshal.driveassist.model.BaseService;
+import com.codewithharshal.driveassist.model.ServiceEntity;
 import com.codewithharshal.driveassist.service.ServiceService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,10 +21,10 @@ public class ServiceController {
 
     // Get all nearby services
     @GetMapping("/nearby")
-    public ResponseEntity<List<BaseService>> getNearby(@RequestParam double lat,
-                                                       @RequestParam double lon,
-                                                       @RequestParam(defaultValue = "5") double radiusKm) {
-        List<BaseService> services = serviceService.getNearbyServices(lat, lon, radiusKm);
+    public ResponseEntity<List<ServiceEntity>> getNearby(@RequestParam double lat,
+                                                         @RequestParam double lon,
+                                                         @RequestParam(defaultValue = "5") double radiusKm) {
+        List<ServiceEntity> services = serviceService.getNearbyServices(lat, lon, radiusKm);
         return ResponseEntity.ok(services);
     }
 }

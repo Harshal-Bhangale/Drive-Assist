@@ -6,7 +6,7 @@ import jakarta.persistence.Table;
 // Inherits Service
 @Entity
 @Table(name="garages")
-public class Garage extends BaseService {
+public class Garage extends ServiceEntity {
 
     private String servicesProvided; // Repair, Tire Change
 
