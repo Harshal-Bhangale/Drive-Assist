@@ -7,7 +7,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "fuel_stations")
-public class FuelStation extends Service {
+public class FuelStation extends BaseService {
 
     private String fuelType; // Petrol, Disel, CNG
 

@@ -1,7 +1,7 @@
 package com.codewithharshal.driveassist.utils;
 
 // Haversine formula/ helper methods
-public class distanceCalculator {
+public class DistanceCalculator {
 
     // Returns distance in kilometers between two lat/lon points
     public static  double distance(double lat1, double lon1, double lat2, double lon2){

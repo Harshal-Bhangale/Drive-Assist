@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED) // Use JOINED strategy for table per subclass
 @Table(name = "services")
-public abstract class Service {
+public abstract class BaseService {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,11 +17,11 @@ public abstract class Service {
     private double latitude;
     private double longitude;
 
-    public Service() {
+    public BaseService() {
 
     }
 
-    public Service(String name, double latitude, double longitude) {
+    public BaseService(String name, double latitude, double longitude) {
         this.name = name;
         this.latitude = latitude;
         this.longitude = longitude;
