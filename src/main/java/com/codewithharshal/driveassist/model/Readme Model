@@ -1,0 +1,44 @@
+In your model package, you usually place all the data classes (entities/POJOs) that represent real-world objects in your Drive Assist project. Since you also want OOP principles applied, the structure should be clean and extensible.
+
+src/main/java/com/driveassist/model/
+│
+├── Service.java            # Abstract parent class (base for all services)
+├── Garage.java             # Extends Service
+├── FuelStation.java        # Extends Service
+├── CarRental.java          # Extends Service
+│
+├── enums/
+│   ├── FuelType.java       # Enum for PETROL, DIESEL, CNG
+│   ├── ServiceType.java    # Enum for FUEL_STATION, GARAGE, CAR_RENTAL
+│
+└── dto/
+    ├── NearbyRequest.java  # DTO for request params (lat, lon, radius)
+    ├── ServiceResponse.java# DTO for API response
+
+Explanation:
+
+1. Service.java (abstract class)
+    Defines common properties for all services (id, name, latitude, longitude, serviceType).
+    Implements shared logic like distanceFromUser().
+2. Garage.java, FuelStation.java, CarRental.java
+    Extend Service.
+    Add their own specific attributes (like garage rating, fuel type, rental car availability).
+3. enums package
+    Holds constants like FuelType and ServiceType.
+    Makes code cleaner instead of using string literals.
+4. dto package (Data Transfer Objects)
+    NearbyRequest.java → wraps request params (lat, lon, radiusKm).
+    ServiceResponse.java → wraps the data you send back (id, name, type, distance).
+
+This way your model layer is organized, OOP-driven, and extensible.
+For example, tomorrow if you add Hotel service, you just create Hotel.java extending Service.
+
+
+
+Note -
+Notes / Tips
+
+  - This uses JOINED inheritance: one parent table (services) + one table per subtype (fuel_stations, garages, car_rentals). Your existing repositories (FuelStationRepository, GarageRepository, CarRentalRepository) work as-is.
+  - Validation annotations are included to keep data clean.
+  - The polymorphic JSON (type field) helps your frontend distinguish items returned from /api/services/nearby.
+  - The distanceKmTo(...) method is @Transient so it won’t affect the DB.

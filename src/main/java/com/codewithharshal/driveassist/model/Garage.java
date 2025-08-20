@@ -1,29 +1,34 @@
 package com.codewithharshal.driveassist.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import com.codewithharshal.driveassist.model.enums.GarageServiceType;
+import jakarta.persistence.*;
 
-// Inherits Service
+import java.util.EnumSet;
+
 @Entity
-@Table(name="garages")
-public class Garage extends ServiceEntity {
+@Table(name = "garages")
+public class Garage extends BaseService {
 
-    private String servicesProvided; // Repair, Tire Change
+    /** Services offered by this garage (stored in join table) */
+    @ElementCollection(targetClass = GarageServiceType.class)
+    @Enumerated(EnumType.STRING)
+    @CollectionTable(name = "garage_services", joinColumns = @JoinColumn(name = "garage_id"))
+    @Column(name = "service", length = 32, nullable = false)
+    private EnumSet<GarageServiceType> servicesProvided = EnumSet.noneOf(GarageServiceType.class);
 
-    public Garage(){
+    @Column(nullable = false)
+    private boolean emergencySupport = false;
 
+    public Garage() { }
+
+    public Garage(String name, Double lat, Double lon, EnumSet<GarageServiceType> servicesProvided) {
+        super(name, lat, lon);
+        this.servicesProvided = servicesProvided == null ? EnumSet.noneOf(GarageServiceType.class) : servicesProvided;
     }
 
-    public Garage(String name, double latitude, double longitude, String servicesProvided){
-        super(name, latitude, longitude);
-        this.servicesProvided = servicesProvided;
-    }
+    public EnumSet<GarageServiceType> getServicesProvided() { return servicesProvided; }
+    public void setServicesProvided(EnumSet<GarageServiceType> servicesProvided) { this.servicesProvided = servicesProvided; }
 
-    public String getServicesProvided() {
-        return servicesProvided;
-    }
-
-    public void setServicesProvided(String servicesProvided) {
-        this.servicesProvided = servicesProvided;
-    }
+    public boolean isEmergencySupport() { return emergencySupport; }
+    public void setEmergencySupport(boolean emergencySupport) { this.emergencySupport = emergencySupport; }
 }

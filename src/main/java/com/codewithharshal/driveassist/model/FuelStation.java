@@ -1,39 +1,32 @@
 package com.codewithharshal.driveassist.model;
 
+import com.codewithharshal.driveassist.model.enums.FuelType;
 import jakarta.persistence.*;
-
-// Inherits service (inheritance)
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "fuel_stations")
-public class FuelStation {
+public class FuelStation extends BaseService {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 16)
+    private FuelType fuelType;
 
-    private String name;
-    private String type; // Petrol, Diesel, CNG
-    private String address;
-    private double latitude;
-    private double longitude;
+    @NotNull
+    @Column(nullable = false)
+    private Boolean open24x7 = Boolean.FALSE;
 
-    // Getters and setters
-    public Long getId() { rehwoDturn id; }
-    public void setId(Long id) { this.id = id; }
+    public FuelStation() { }
 
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
+    public FuelStation(String name, Double lat, Double lon, FuelType fuelType, boolean open24x7) {
+        super(name, lat, lon);
+        this.fuelType = fuelType;
+        this.open24x7 = open24x7;
+    }
 
-    public String getType() { return type; }
-    public void setType(String type) { this.type = type; }
+    public FuelType getFuelType() { return fuelType; }
+    public void setFuelType(FuelType fuelType) { this.fuelType = fuelType; }
 
-    public String getAddress() { return address; }
-    public void setAddress(String address) { this.address = address; }
-
-    public double getLatitude() { return latitude; }
-    public void setLatitude(double latitude) { this.latitude = latitude; }
-
-    public double getLongitude() { return longitude; }
-    public void setLongitude(double longitude) { this.longitude = longitude; }
+    public Boolean getOpen24x7() { return open24x7; }
+    public void setOpen24x7(Boolean open24x7) { this.open24x7 = open24x7; }
 }
