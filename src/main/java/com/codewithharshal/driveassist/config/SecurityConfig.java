@@ -8,23 +8,11 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 public class SecurityConfig {
 
-    private static final String[] SWAGGER_WHITELIST = {
-            "/v3/api-docs/**",
-            "/swagger-ui/**",
-            "/swagger-ui.html"
-    };
-
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-                .csrf().disable()
-                .authorizeHttpRequests()
-                .requestMatchers( "/api/services/nearby").permitAll()
-                .requestMatchers(SWAGGER_WHITELIST).permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .httpBasic().disable(); // disable browser popup for Swagger
-
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http.csrf().disable()
+                .authorizeRequests()
+                .anyRequest().permitAll();
         return http.build();
     }
 }

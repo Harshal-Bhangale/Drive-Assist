@@ -52,17 +52,11 @@ public abstract class BaseService {
     @Column(nullable = false)
     private Double longitude;
 
-//    @DecimalMin("0.0") @DecimalMax("5.0")
-////    @Column(precision = 2, scale = 1)
-//    private Double rating; // optional (0.0 - 5.0)
     @DecimalMin("0.0")
     @DecimalMax("5.0")
     @Column
     private Double rating;
-//    @DecimalMin("0.0")
-//    @DecimalMax("5.0")
-//    @Column(precision = 2, scale = 1)
-//    private BigDecimal rating;
+
 
     protected BaseService() { }
 

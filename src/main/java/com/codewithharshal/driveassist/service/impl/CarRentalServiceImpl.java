@@ -36,24 +36,14 @@ public class CarRentalServiceImpl implements CarRentalService {
         repository.deleteById(id);
     }
 
-    /**
-     * Finds the nearest available car of a specific type for the user’s location.
-     *
-     * @param carType  Type of car (e.g., SUV, Sedan)
-     * @param userLat  User’s latitude
-     * @param userLon  User’s longitude
-     * @return nearest available CarRental or null if none found
-     */
     @Override
     public CarRental findAvailableCar(String carType, Double userLat, Double userLon) {
         return repository.findAll().stream()
-                .filter(CarRental::isAvailable) // only available cars
-                .filter(car -> carType == null || carType.isEmpty() || carType.equalsIgnoreCase(car.getCarType()))
-                .min((a, b) -> {
-                    double distA = Math.pow(a.getLatitude() - userLat, 2) + Math.pow(a.getLongitude() - userLon, 2);
-                    double distB = Math.pow(b.getLatitude() - userLat, 2) + Math.pow(b.getLongitude() - userLon, 2);
-                    return Double.compare(distA, distB);
-                })
+                .filter(car -> car.isAvailable() && car.getCarType().equalsIgnoreCase(carType))
+                .min((a, b) -> Double.compare(
+                        a.distanceKmTo(userLat, userLon),
+                        b.distanceKmTo(userLat, userLon)
+                ))
                 .orElse(null);
     }
 }

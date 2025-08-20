@@ -22,12 +22,6 @@ public class CarRentalController {
         return carRentalService.getAll();
     }
 
-    @GetMapping("/hello")
-    public String hello(String name)
-    {
-        return name;
-    }
-
     @GetMapping("/{id}")
     public ResponseEntity<CarRental> getById(@PathVariable Long id) {
         CarRental car = carRentalService.getById(id);
@@ -35,8 +29,10 @@ public class CarRentalController {
     }
 
     @PostMapping
-    public CarRental create(@RequestBody CarRental car) {
-        return carRentalService.save(car);
+    public ResponseEntity<CarRental> create(@RequestBody CarRental car) {
+        // save and return created object
+        CarRental savedCar = carRentalService.save(car);
+        return ResponseEntity.ok(savedCar);
     }
 
     @DeleteMapping("/{id}")
@@ -45,12 +41,13 @@ public class CarRentalController {
         return ResponseEntity.noContent().build();
     }
 
-
     @GetMapping("/nearest")
-    public CarRental getNearestAvailableCar(@RequestParam String carType,
-                                            @RequestParam Double latitude,
-                                            @RequestParam Double longitude) {
-        return carRentalService.findAvailableCar(carType, latitude, longitude);
-    }
+    public ResponseEntity<CarRental> getNearestAvailableCar(
+            @RequestParam String carType,
+            @RequestParam Double latitude,
+            @RequestParam Double longitude) {
 
+        CarRental car = carRentalService.findAvailableCar(carType, latitude, longitude);
+        return car != null ? ResponseEntity.ok(car) : ResponseEntity.notFound().build();
+    }
 }

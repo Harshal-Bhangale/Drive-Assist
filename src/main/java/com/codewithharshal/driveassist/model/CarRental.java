@@ -2,6 +2,8 @@ package com.codewithharshal.driveassist.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "car_rentals")
@@ -11,16 +13,17 @@ public class CarRental extends BaseService {
     @Column(nullable = false)
     private int availableCars = 0;
 
-    /** Optional: avg price per day in local currency */
+    /** Optional: avg price per day */
     @Min(0)
     private Double pricePerDay;
 
-    /** Optional: whether drivers are available with rentals */
+    /** Optional: whether drivers are available */
     @Column(nullable = false)
     private boolean driverAvailable = false;
 
+    @NotBlank
     @Column(nullable = false, length = 32)
-    private String carType; // NEW FIELD
+    private String carType;
 
     public CarRental() { }
 
@@ -30,6 +33,7 @@ public class CarRental extends BaseService {
         this.carType = carType;
     }
 
+    // Getters & Setters
     public int getAvailableCars() { return availableCars; }
     public void setAvailableCars(int availableCars) { this.availableCars = availableCars; }
 
@@ -39,12 +43,12 @@ public class CarRental extends BaseService {
     public boolean isDriverAvailable() { return driverAvailable; }
     public void setDriverAvailable(boolean driverAvailable) { this.driverAvailable = driverAvailable; }
 
-    public String getCarType() { return carType; } // NEW GETTER
+    public String getCarType() { return carType; }
     public void setCarType(String carType) { this.carType = carType; }
 
+    /** Convenience method to check if any cars are available */
+    @Transient
     public boolean isAvailable() {
         return availableCars > 0;
     }
-
-
 }
