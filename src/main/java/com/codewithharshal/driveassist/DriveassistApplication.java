@@ -8,5 +8,4 @@ public class DriveassistApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(DriveassistApplication.class, args);
 	}
-
 }
