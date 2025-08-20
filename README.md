@@ -30,6 +30,65 @@ This project demonstrates **end-to-end application development** using **Java, S
 
 ---
 
+## Project Structure - 
+
+src
+├───main
+│   ├───java
+│   │   └───com
+│   │       └───codewithharshal
+│   │           └───driveassist
+│   │               │   DriveassistApplication.java
+│   │               │
+│   │               ├───config
+│   │               │       SecurityConfig.java
+│   │               │
+│   │               ├───controller
+│   │               │       CarRentalController.java
+│   │               │       FuelStationController.java
+│   │               │       GarageController.java
+│   │               │
+│   │               ├───model
+│   │               │   │   BaseService.java
+│   │               │   │   CarRental.java
+│   │               │   │   FuelStation.java
+│   │               │   │   Garage.java
+│   │               │   │
+│   │               │   ├───dto
+│   │               │   │       NearbyRequest.java
+│   │               │   │       ServiceResponse.java
+│   │               │   │
+│   │               │   └───enums
+│   │               │           FuelType.java
+│   │               │           GarageServiceType.java
+│   │               │           ServiceType.java
+│   │               │
+│   │               ├───repository
+│   │               │       CarRentalRepository.java
+│   │               │       FuelStationRepository.java
+│   │               │       GarageRepository.java
+│   │               │
+│   │               ├───service
+│   │               │   │   CarRentalService.java
+│   │               │   │   FuelStationService.java
+│   │               │   │   GarageService.java
+│   │               │   │   NearbyService.java
+│   │               │   │
+│   │               │   └───impl
+│   │               │           CarRentalServiceImpl.java
+│   │               │           FuelStationServiceImpl.java
+│   │               │           GarageServiceImpl.java
+│   │               │
+│   │               └───utils
+│   │                       DistanceCalculator.java
+│   │
+│   └───resources
+│       │   application.properties
+│       │
+│       ├───static
+│       └───templates
+
+
 ## Tech Stack
 
 - **Backend:** Java, Spring Boot, Spring Data JPA, Hibernate  
