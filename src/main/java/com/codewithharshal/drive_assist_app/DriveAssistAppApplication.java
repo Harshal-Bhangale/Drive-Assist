@@ -1,13 +1,13 @@
-package com.codewithharshal.drive_assist;
+package com.codewithharshal.drive_assist_app;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class DriveAssistApplication {
+public class DriveAssistAppApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(DriveAssistApplication.class, args);
+		SpringApplication.run(DriveAssistAppApplication.class, args);
 	}
 
 }

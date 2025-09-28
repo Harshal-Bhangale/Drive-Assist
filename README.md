@@ -32,7 +32,7 @@ This project demonstrates **end-to-end application development** using **Java, S
 
 ## Tech Stack
 
-- **Backend:** Java, Spring Boot, Spring Data JPA, Hibernate, Spring Security, Spring AI
+- **Backend:** Java, Spring Boot, Spring Data JPA, Hibernate  
 - **Database:** MySQL  
 - **APIs:** RESTful endpoints for all services  
 - **Validation:** Jakarta Bean Validation  
