@@ -18,6 +18,7 @@ public class UserController {
 
     public UserController(UserService userService) { this.userService = userService; }
 
+	// User Register
     @PostMapping("/register")
     public ResponseEntity<?> register(@Valid @RequestBody UserDTO dto) {
         User created = userService.register(dto);
@@ -28,7 +29,8 @@ public class UserController {
                 "username", created.getUsername()
         ));
     }
-
+	
+	// User Login
     @PostMapping("/login")
     public ResponseEntity<?> login(@Valid @RequestBody LoginDTO dto) {
         return userService.login(dto)
@@ -41,6 +43,7 @@ public class UserController {
                 .orElseGet(() -> ResponseEntity.status(401).body(Map.of("error", "Invalid credentials")));
     }
 
+	// User Get Profile
     @GetMapping("/{id}")
     public ResponseEntity<?> getProfile(@PathVariable Long id) {
         return userService.getById(id)
