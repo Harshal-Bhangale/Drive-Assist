@@ -1,0 +1,43 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: user-service
+          uri: lb://user-service
+          predicates:
+            - Path=/api/v1/users/**
+        - id: fuel-station-service
+          uri: lb://fuel-station-service
+          predicates:
+            - Path=/api/v1/fuel-stations/**
+        - id: garage-service
+          uri: lb://garage-service
+          predicates:
+            - Path=/api/v1/garages/**
+        - id: rental-service
+          uri: lb://rental-service
+          predicates:
+            - Path=/api/v1/rentals/**
+        - id: map-service
+          uri: lb://map-service
+          predicates:
+            - Path=/api/v1/map/**
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+
+app:
+  security:
+    jwt:
+      secret: ${JWT_SECRET:my-super-secret-key-that-is-at-least-256-bits-long-for-hs256}
